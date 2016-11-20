@@ -27,7 +27,7 @@ If `80` and `3306` ports are available on your host machine, you can map it like
 
 - `http://localhost:8000` to open a index page in document root of nginx.
 - `$ mysql --h127.0.0.1 -uroot -P33060 -p` (Default password: `root`).
-- `http://localhost:9001` to open the supervisor dashboard.
+- `http://localhost:9001` to open the supervisor dashboard (Default account: `user`/`pass`).
 
 ## Build
 
