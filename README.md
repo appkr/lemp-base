@@ -18,7 +18,7 @@ To download the already built image from docker hub and run it (You have to prov
     -p 8000:80 \
     -p 33060:3306 \
     -p 9001:9001 \
-    appkr/lemp-base:7.0
+    appkr/lemp-base
 ```
 
 If `80` and `3306` ports are available on your host machine, you can map it like `-p 80:80 -p 3306:3306`.
@@ -34,6 +34,8 @@ If `80` and `3306` ports are available on your host machine, you can map it like
 To build your own image:
 
 ```sh
+~/ $ git clone git@github.com:appkr/lemp-base.git
+~/ $ cd lemp-base
 ~/lemp-base $ docker build \
     --tag <name-your-image>:<tag> \
     .
