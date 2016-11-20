@@ -4,7 +4,7 @@
 
 LEMP in one container.
 
-I know this is not a docker-way though, I believe it is overwhelming for PHP or Docker beginners to understand the concept of cluster, which consists of multiple containers. I coundn't find working one in the Internet, supporting Ubuntu 16.04, Nginx 1.x, PHP 7.0 & FPM, and MySQL 5.7. Really.
+I know this is not a docker-way though, I believe it is overwhelming for PHP or Docker beginners to understand the concept of cluster, which consists of multiple containers. I couldn't find working one in the Internet, supporting Ubuntu 16.04, Nginx 1.x, PHP 7.0 & FPM, and MySQL 5.7 just in one image. Really.
 
 ## Quick Start
 

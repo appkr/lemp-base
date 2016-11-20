@@ -53,11 +53,16 @@ RUN ln -nfs /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 # Install Composer
 #-------------------------------------------------------------------------------
 
-RUN curl -sS https://getcomposer.org/installer | php -- \
-        --install-dir=${COMPOSER_HOME:-/usr/local/bin} \
-        --filename=composer \
-    && echo "" >> /root/.profile \
-    && echo 'export PATH="\$PATH:~/.composer/vendor/bin"' >> /root/.profile
+# Doing a composer job in the host machine is best practice.
+# If you need a composer in container, you can mount your local composer
+#  to the container at run time, like:
+#  docker run ... -v `which composer`:/usr/local/bin/composer ...
+
+#RUN curl -sS https://getcomposer.org/installer | php -- \
+#        --install-dir=${COMPOSER_HOME:-/usr/local/bin} \
+#        --filename=composer \
+#    && echo "" >> /root/.profile \
+#    && echo 'export PATH="\$PATH:~/.composer/vendor/bin"' >> /root/.profile
 
 #-------------------------------------------------------------------------------
 # Set Volumes to Mount and Etc
