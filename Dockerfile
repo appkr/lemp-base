@@ -32,7 +32,6 @@ RUN apt-get update \
         php-curl \
         php-mbstring \
         php-sqlite3 \
-        php-memcached \
         php-xml \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
