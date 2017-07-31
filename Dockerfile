@@ -24,6 +24,7 @@ RUN apt-get update \
         curl \
         supervisor \
         ca-certificates \
+        vim \
         php-fpm \
         php-cli \
         php-gd \
@@ -32,6 +33,7 @@ RUN apt-get update \
         php-curl \
         php-mbstring \
         php-sqlite3 \
+        php-xdebug \
         php-xml \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
