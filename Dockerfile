@@ -22,6 +22,7 @@ RUN apt-get update \
         mysql-server \
         mysql-client \
         curl \
+        locales \
         supervisor \
         ca-certificates \
         vim \
@@ -36,6 +37,12 @@ RUN apt-get update \
         php-xdebug \
         php-xml \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+#-------------------------------------------------------------------------------
+# Install utf8 locales
+#-------------------------------------------------------------------------------
+
+RUN locale-gen en_US.UTF-8
 
 #-------------------------------------------------------------------------------
 # Copy Settings
