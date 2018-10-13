@@ -1,0 +1,24 @@
+sudo: required
+
+language: php
+
+php:
+- 7.0
+
+services:
+- docker
+
+before_install:
+- docker build --tag lemp-base .
+- sleep 10
+- docker run -d --name lemp-base -v `pwd`/html:/var/www/html -v `pwd`/data:/var/lib/mysql -p 18367:80 lemp-base
+
+script:
+- sleep 10
+- docker ps
+- sleep 10
+- curl -s -XGET http://localhost:18367
+#- docker exec -it lemp-base mysql -e "select 1;"
+
+matrix:
+  fast_finish: true
