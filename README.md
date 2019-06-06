@@ -1,3 +1,12 @@
+[![Build Status](https://travis-ci.org/appkr/lemp-base.svg?branch=master)](https://travis-ci.org/appkr/lemp-base)
+
+`master` branch serves Ubuntu16.04 and PHP7.0. For Ubuntu18.04 and PHP7.2 see `18.04` branch.
+
+branch|image/tag|Ubuntu|PHP|MySQL
+---|---|---|---|---
+`master``16.04`|`appkr/lemp-base:16.04`|16.04|7.0|5.7
+`18.04`|`appkr/lemp-base:18.04`|18.04|7.2|5.7
+
 # LEMP Base Docker Image
 
 ## 1. What is this?
