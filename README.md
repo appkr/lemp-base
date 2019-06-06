@@ -1,33 +1,44 @@
+[![Build Status](https://travis-ci.org/appkr/lemp-base.svg?branch=18.04)](https://travis-ci.org/appkr/lemp-base)
+
 # LEMP Base Docker Image
 
 ## 1. What is this?
 
 LEMP in one container.
 
-I know this is not a docker-way though, I believe it is overwhelming for PHP or Docker beginners to understand the concept of cluster, which consists of multiple containers. I couldn't find working one in the Internet, supporting Ubuntu 16.04, Nginx 1.x, PHP 7.0 & FPM, and MySQL 5.7 just in one image. Really.
+I know this is not a docker-way though, I believe it is overwhelming for PHP or Docker beginners to understand the concept of cluster, which consists of multiple containers. I couldn't find working one in the Internet, supporting Ubuntu, Nginx, PHP & FPM, and MySQL just in one image. Really.
+
+`latest` tag is linked to `16.04`
+
+tag|Ubuntu|PHP|MySQL
+---|---|---|---
+16.04|16.04|7.0|5.7
+18.04|18.04|7.2|5.7
 
 ## 2. Quick Start
 
-To download the already built image from docker hub and run it (You have to provide `<your-container-name>`, `<your-html-dir>`, `<your-mysql-data-dir>`):
+To download the already built image from docker hub and run it (You have to provide `<your-container-name>`):
 
 ```sh
-~ $ docker run \
+~ $ docker run -d \
     --name <your-container-name>
-    -v `pwd`/<your-html-dir>:/var/www/html \
-    -v `pwd`/<your-mysql-data-dir>:/var/lib/mysql \
-    -p 8000:80 \
-    -p 33060:3306 \
+    -v `pwd`/html:/var/www/html \
+    -v `pwd`/data:/var/lib/mysql \
+    -p 80:80 \
+    -p 3306:3306 \
     -p 9001:9001 \
-    appkr/lemp-base
+    -p 10001:10001 \
+    appkr/lemp-base:18.04
 ```
 
-If `80` and `3306` ports are available on your host machine, you can map it like `-p 80:80 -p 3306:3306`.
+If `80` and `3306` ports are not available on your host machine, you can map it like `-p 8000:80 -p 33060:3306`.
 
 ## 3. Test
 
-- `http://localhost:8000` to open a index page in document root of nginx.
-- `$ mysql --h127.0.0.1 -uroot -P33060 -p` (Default password: `root`).
+- `http://localhost` to open a index page in document root of nginx.
+- `$ mysql --h127.0.0.1 -uroot -P3306 -p` (Default password: `secret`).
 - `http://localhost:9001` to open the supervisor dashboard (Default account: `homestead`/`secret`).
+- Xdebug port is set to `10001`
 
 ## 4. Your Own Build
 
@@ -44,13 +55,14 @@ To build your own image:
 To run your own build:
 
 ```sh
-~/lemp-base $ docker run \
+~/lemp-base $ docker run -d \
     --name <name-your-container>
     -v `pwd`/html:/var/www/html \
     -v `pwd`/data:/var/lib/mysql \
-    -p 8000:80 \
-    -p 33060:3306 \
+    -p 80:80 \
+    -p 3306:3306 \
     -p 9001:9001 \
+    -p 10001:10001 \
     <name-your-image>:<tag>
 ```
 
@@ -64,7 +76,7 @@ While building the Dockerfile, most of the errors were aroused from MySQL.
 
 -   "Fatal error: Can't open and lock privileges table: Table 'mysql.user' does'nt exists" This happens when there is not `mysql.user` table. Stop the running container, remove all the content of local mounted volume for `/var/lib/mysql`(e.g. `data`), and then restart the container.
 
--   If `root@%` user was not correctly created:
+-   If MySQL `root@%` user was not correctly created:
 
     ```bash
     ~/any $ docker exec -it <container_name_or_hash> \

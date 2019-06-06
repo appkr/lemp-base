@@ -1,9 +1,9 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV MYSQL_DATA_DIR=/var/lib/mysql
 ENV MYSQL_PID_DIR=/var/run/mysqld
-ENV MYSQL_ROOT_PASSWORD=root
+ENV MYSQL_ROOT_PASSWORD=secret
 
 #-------------------------------------------------------------------------------
 # Install Packages
@@ -18,6 +18,7 @@ RUN { \
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
+        apt-utils \
         nginx \
         mysql-server \
         mysql-client \
@@ -29,7 +30,6 @@ RUN apt-get update \
         php-fpm \
         php-cli \
         php-gd \
-        php-mcrypt \
         php-mysql \
         php-curl \
         php-mbstring \
@@ -55,7 +55,7 @@ COPY files /
 #-------------------------------------------------------------------------------
 
 RUN mkdir -p /var/run/php
-RUN sed -i "s/listen = .*/listen = 127.0.0.1:9000/" /etc/php/7.0/fpm/pool.d/www.conf
+RUN sed -i "s/listen = .*/listen = 127.0.0.1:9000/" /etc/php/7.2/fpm/pool.d/www.conf
 RUN ln -nfs /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 
 #-------------------------------------------------------------------------------
@@ -78,7 +78,7 @@ RUN ln -nfs /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 #-------------------------------------------------------------------------------
 
 VOLUME ["/var/www/html", "/var/lib/mysql"]
-EXPOSE 80 9001 3306
+EXPOSE 80 9001 3306 10001
 WORKDIR /var/www/html
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
