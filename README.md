@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/appkr/lemp-base.svg?branch=master)](https://travis-ci.org/appkr/lemp-base)
+[![Build Status](https://travis-ci.org/appkr/lemp-base.svg?branch=16.04)](https://travis-ci.org/appkr/lemp-base)
 
 # LEMP Base Docker Image
 
